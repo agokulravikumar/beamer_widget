@@ -14,12 +14,20 @@ Welcome to Test!
 };
 </script> -->
 <script>
+	var url_string = window.location.href;
+    	var url = new URL(url_string);
+	
+    	var cuid = url.searchParams.get("cuid");
+	var email = url.searchParams.get("email");
+	var fname = url.searchParams.get("fname");
+	var lname = url.searchParams.get("lname");
+	
 	var beamer_config = {
 		product_id : 'WXugbSBM43398',
-		user_id: 'beam1234',
-		user_email: 'gokul.ravikumar@getbeamer.com',
-		user_firstname: 'Gokul',
-		user_lastname: 'Ravikumar'
+		user_id: cuid ? cuid : null,
+		user_email: email ? email : null,
+		user_firstname: fname ? fname : null,
+		user_lastname: lname ? lname : null
 };
 </script>
 <script type="text/javascript" src="https://3pc-dev-dot-getbeamer.ue.r.appspot.com/js/beamer-embed.js" defer="defer"></script>
