@@ -5,8 +5,20 @@
 <body>
 <p>Hello! Welcome to Beamer Widget!</p>
 <script>
+	var url_string = window.location.href;
+    	var url = new URL(url_string);
+	
+    	var cuid = url.searchParams.get("cuid");
+	var email = url.searchParams.get("email");
+	var fname = url.searchParams.get("fname");
+	var lname = url.searchParams.get("lname");
+
 	var beamer_config = {
-		product_id : "ppbgePUs63815" //DO NOT CHANGE: This is your product code on Beamer
+		product_id : 'ppbgePUs63815',
+		user_id: cuid ? cuid : null,
+		user_email: email ? email : null,
+		user_firstname: fname ? fname : null,
+		user_lastname: lname ? lname : null
 	};
 </script>
 <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
