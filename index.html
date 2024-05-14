@@ -14,12 +14,24 @@
 	var lname = url.searchParams.get("lname");
 
 	var beamer_config = {
-		product_id : 'ppbgePUs63815',
-		user_id: cuid ? cuid : null,
-		user_email: email ? email : null,
-		user_firstname: fname ? fname : null,
-		user_lastname: lname ? lname : null
+		product_id : 'ppbgePUs63815'
 	};
+
+	if (cuid) {
+	    beamer_config['user_id'] = cuid;
+	}
+
+	if (email) {
+	    beamer_config['user_email'] = email;
+	}
+
+	if (fname) {
+	    beamer_config['user_firstname'] = fname;
+	}
+
+	if (lname) {
+		beamer_config['user_lastname'] = lname;
+	}
 </script>
 <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
 </body>
