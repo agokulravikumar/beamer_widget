@@ -2,28 +2,18 @@
 	<head></head>
 <body>
 Welcome to Test!
-
-<!-- <script>
-	var beamer_config = {
-		product_id: '<BEAMER_PROD_ID>',
-		user_id: 'US1234',
-		email: 'example@gmail.com',
-		role: 'sample', // Not supported in permalink
-		force_filter: 'sample', // Supported
-		theme: 'meteocontrol', // Supported
-};
-</script> -->
 <script>
 	var url_string = window.location.href;
     	var url = new URL(url_string);
 	
-    	var cuid = url.searchParams.get("cuid");
+    	var pid = url.searchParams.get("pid");
+	var cuid = url.searchParams.get("cuid");
 	var email = url.searchParams.get("email");
 	var fname = url.searchParams.get("fname");
 	var lname = url.searchParams.get("lname");
 	
 	var beamer_config = {
-		product_id : 'WXugbSBM43398'
+		product_id : pid ? pid : 'WXugbSBM43398'
 	};
 
 	if (cuid) {
