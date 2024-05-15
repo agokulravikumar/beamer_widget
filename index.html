@@ -8,13 +8,14 @@
 	var url_string = window.location.href;
     	var url = new URL(url_string);
 	
-    	var cuid = url.searchParams.get("cuid");
+    	var pid = url.searchParams.get("pid");
+	var cuid = url.searchParams.get("cuid");
 	var email = url.searchParams.get("email");
 	var fname = url.searchParams.get("fname");
 	var lname = url.searchParams.get("lname");
 
 	var beamer_config = {
-		product_id : 'ppbgePUs63815'
+		product_id : pid ? pid : 'ppbgePUs63815'
 	};
 
 	if (cuid) {
