@@ -11,6 +11,7 @@ Welcome to Test!
 	var email = url.searchParams.get("email");
 	var fname = url.searchParams.get("fname");
 	var lname = url.searchParams.get("lname");
+	var ffilter = url.searchParams.get("ffilter");
 	
 	var beamer_config = {
 		product_id : pid ? pid : 'WXugbSBM43398'
@@ -30,6 +31,10 @@ Welcome to Test!
 
 	if (lname) {
 		beamer_config['user_lastname'] = lname;
+	}
+
+	if (ffilter) {
+		beamer_config['force_filter'] = ffilter;
 	}
 </script>
 <script type="text/javascript" src="https://3pc-dev-dot-getbeamer.ue.r.appspot.com/js/beamer-embed.js" defer="defer"></script>
