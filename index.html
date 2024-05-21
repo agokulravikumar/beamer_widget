@@ -3,7 +3,7 @@
 	<title>Beamer Widget</title>
 </head>
 <body>
-<p>Hello! Welcome to Beamer Widget!</p>
+<p id="test-selector">Hello! Welcome to Beamer Widget!</p>
 <script>
 	var url_string = window.location.href;
     	var url = new URL(url_string);
@@ -13,10 +13,16 @@
 	var email = url.searchParams.get("email");
 	var fname = url.searchParams.get("fname");
 	var lname = url.searchParams.get("lname");
+	var embed = url.searchParams.get("embed");
 
 	var beamer_config = {
 		product_id : pid ? pid : 'ppbgePUs63815'
 	};
+
+	if (embed) {
+		beamer_config['embed'] = true;
+		beamer_config['selector'] = 'test-selector';
+	}
 
 	if (cuid) {
 	    beamer_config['user_id'] = cuid;
