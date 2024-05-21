@@ -16,11 +16,21 @@
 	var lname = url.searchParams.get("lname");
 	var embed = url.searchParams.get("embed");
 	var selector = url.searchParams.get("selector");
+	var filter = url.searchParams.get("filter");
+	var ffitler = url.searchParams.get("ffilter");
 
 	var beamer_config = {
 		product_id : pid ? pid : 'ppbgePUs63815'
 	};
 
+	if (filter) {
+		beamer_config['filter'] = filter;
+	}
+
+	if (ffilter) {
+		beamer_config['force_filter'] = ffilter;
+	}
+	
 	if (selector) {
 		beamer_config['selector'] = 'test-selector';
 	}
