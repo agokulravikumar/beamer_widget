@@ -1,64 +1,79 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Beamer Widget</title>
-	<meta name="google-site-verification" content="T1pMXY9uPlmX-oHfW-OulXu1I0XD7_Xhyp-ATD-0mxA" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beamer Widget</title>
+    <meta name="google-site-verification" content="T1pMXY9uPlmX-oHfW-OulXu1I0XD7_Xhyp-ATD-0mxA" />
 </head>
 <body>
-<p>Hello! Welcome to <a href='#' id="test-selector">Beamer Widget</a>!</p>
-	<div id="embed-area"></div>
-<script>
-	var url_string = window.location.href;
-    	var url = new URL(url_string);
-	
-    	var pid = url.searchParams.get("pid");
-	var cuid = url.searchParams.get("cuid");
-	var email = url.searchParams.get("email");
-	var fname = url.searchParams.get("fname");
-	var lname = url.searchParams.get("lname");
-	var embed = url.searchParams.get("embed");
-	var selector = url.searchParams.get("selector");
-	var filter = url.searchParams.get("filter");
-	var ffilter = url.searchParams.get("ffilter");
+    <p>Hello! Welcome to <a href="#" id="test-selector">Beamer Widget</a>!</p>
+    <div id="embed-area"></div>
 
-	var beamer_config = {
-		product_id : pid ? pid : 'ppbgePUs63815',
-		addl_roles: [1,2,3],
-		addlRole: "1,4,5"
-	};
+    <script>
+        // Get the current URL
+        var url_string = window.location.href;
+        var url = new URL(url_string);
 
-	if (filter) {
-		beamer_config['filter'] = filter;
+        // Retrieve the parameters from the URL
+        var pid = url.searchParams.get("pid");
+        var cuid = url.searchParams.get("cuid");
+        var email = url.searchParams.get("email");
+        var fname = url.searchParams.get("fname");
+        var lname = url.searchParams.get("lname");
+        var embed = url.searchParams.get("embed");
+        var selector = url.searchParams.get("selector");
+        var filter = url.searchParams.get("filter");
+        var ffilter = url.searchParams.get("ffilter");
+	var hideFeedback = url.searchParams.get("hideFeedback");
+
+        // Default configuration for Beamer Widget
+        var beamer_config = {
+            product_id: pid ? pid : 'ppbgePUs63815' // Default product ID
+        };
+
+        // Add additional parameters to the config if provided
+        if (filter) {
+            beamer_config['filter'] = filter;
+        }
+
+        if (ffilter) {
+            beamer_config['force_filter'] = ffilter;
+        }
+
+        if (selector) {
+            beamer_config['selector'] = selector;  // Use the provided selector
+        }
+
+        if (embed) {
+            beamer_config['embed'] = true;
+            beamer_config['selector'] = 'embed-area'; // Embed widget in the specified area
+        }
+
+        if (cuid) {
+            beamer_config['user_id'] = cuid;
+        }
+
+        if (email) {
+            beamer_config['user_email'] = email;
+        }
+
+        if (fname) {
+            beamer_config['user_firstname'] = fname;
+        }
+
+        if (lname) {
+            beamer_config['user_lastname'] = lname;
+        }
+
+	if (hideFeedback) {
+	    beamer_config['hide_feedback'] = true;
 	}
 
-	if (ffilter) {
-		beamer_config['force_filter'] = ffilter;
-	}
-	
-	if (selector) {
-		beamer_config['selector'] = 'test-selector';
-	}
-	
-	if (embed) {
-		beamer_config['embed'] = true;
-		beamer_config['selector'] = 'embed-area';
-	}
+        // Log the configuration for debugging
+        console.log(beamer_config);
+    </script>
 
-	if (cuid) {
-	    beamer_config['user_id'] = cuid;
-	}
-
-	if (email) {
-	    beamer_config['user_email'] = email;
-	}
-
-	if (fname) {
-	    beamer_config['user_firstname'] = fname;
-	}
-
-	if (lname) {
-		beamer_config['user_lastname'] = lname;
-	}
-</script>
-<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+    <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
 </body>
 </html>
