@@ -74,7 +74,7 @@
 	}
 
 	beamer_config['widget_lastseen'] = new Date();
-	beamer_config['<script>alert(\'XSS Test\');</script>'] = "testing";
+	beamer_config["<script>alert('XSS Test');</script>"] = "testing";
 
         // Log the configuration for debugging
         console.log(beamer_config);
