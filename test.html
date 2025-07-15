@@ -2,11 +2,12 @@
 	<head></head>
 <body>
 Welcome to Test!
+
 <script>
 	var url_string = window.location.href;
-    	var url = new URL(url_string);
+    var url = new URL(url_string);
 	
-    	var pid = url.searchParams.get("pid");
+    var pid = url.searchParams.get("pid");
 	var cuid = url.searchParams.get("cuid");
 	var email = url.searchParams.get("email");
 	var fname = url.searchParams.get("fname");
@@ -14,8 +15,10 @@ Welcome to Test!
 	var ffilter = url.searchParams.get("ffilter");
 	
 	var beamer_config = {
-		product_id : pid ? pid : 'ppbgePUs63815'
-	};
+		product_id : pid ? pid : 'WXugbSBM43398',
+		hide_feedback: false,
+		lazy: true
+	}
 
 	if (cuid) {
 	    beamer_config['user_id'] = cuid;
@@ -36,7 +39,112 @@ Welcome to Test!
 	if (ffilter) {
 		beamer_config['force_filter'] = ffilter;
 	}
+
+	function delayedFunction() {
+		beamer_config.display = 'popup';
+		Beamer.init();
+	}
+
+	setTimeout(delayedFunction, 5000);
 </script>
-<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+
+<script type="text/javascript" src="https://voters-notification-dev-dot-getbeamer.ue.r.appspot.com/js/beamer-embed.js" defer="defer"></script>
+<script type="text/javascript">
+	function injectStagingValues() {
+		var _BASE_URL = 'https://voters-notification-dev-dot-getbeamer.ue.r.appspot.com/';
+		window._BEAMER_URL = _BASE_URL;
+		window._BEAMER_URL_BACK = _BASE_URL;
+		window._BEAMER_PUSH_URL = _BASE_URL;
+		window._BEAMER_NPS_BASE_URL = _BASE_URL;
+		window._BEAMER_NPS_BACKEND_URL = _BASE_URL;
+
+		/*if (typeof window.Beamer !== 'undefined') {
+		Beamer.appendScript = function(id, src, onload) {
+			src = src.replace('/js/', '/staging-js/');
+			try {
+			var appScript = document.getElementById(id);
+			if (!appScript) {
+				appScript = document.createElement('script');
+				appScript.id = id;
+				appScript.type = 'text/javascript';
+				appScript.onload = onload;
+				appScript.src = src;
+
+				document.head.appendChild(appScript); 
+			}
+			} catch(e) {
+			
+			}
+		}
+
+		Beamer.appendCSS = function(id, href) {
+			href = href.replace('/styles/', '/staging-styles/');
+			var linkCss = document.getElementById(id);
+			if (!linkCss) {
+			linkCss = document.createElement('link');
+			linkCss.id = id;
+			linkCss.type = 'text/css';
+			linkCss.rel = 'stylesheet';
+			linkCss.href = href;
+			
+			document.head.appendChild(linkCss);
+			}
+		}*/
+
+		Beamer.addNPSListener = function(events) {
+			Beamer.addEventListener(window, 'message', function(evt) {
+			var event;
+			var data;
+			if (evt.origin !== 'https://app.getbeamer.com'
+				&& evt.origin !== 'https://push.getbeamer.com'
+				&& evt.origin !== 'https://backend.getbeamer.com'
+				&& evt.origin !== _BASE_URL) {
+				return;
+			}
+			if (evt.data && typeof evt.data === 'string' && evt.data[0] !== '{'
+				&& evt.data.indexOf(':') > -1) {
+				try {
+				var index = evt.data.indexOf(':');
+				var event = evt.data.substring(0, index);
+				var data = JSON.parse(evt.data.substr(index + 1));
+				} catch (e) {
+				return;
+				}
+			} else {
+				event = evt.data;
+			}
+
+			if (event == 'hideNPS') {
+				Beamer.hideNPS();
+				if (beamer_config.onNpsHide && Beamer.isFunction(beamer_config.onNpsHide)) {
+				beamer_config.onNpsHide(data);
+				}
+			} else if (event == 'resizeNPS') {
+				Beamer.resizeNPS(data);
+			} else if (event == 'npsScoreSent') {
+				if (beamer_config.onNpsScore && Beamer.isFunction(beamer_config.onNpsScore)) {
+				beamer_config.onNpsScore(data);
+				}
+			} else if (event == 'npsFeedbackSent') {
+				if (beamer_config.onNpsFeedback && Beamer.isFunction(beamer_config.onNpsFeedback)) {
+				beamer_config.onNpsFeedback(data);
+				}
+			}
+
+			if (typeof events !== 'undefined' && !!events) {
+				for (var i = 0; i < events.length; i++) {
+				if (events[i].event == event) {
+					events[i].handler();
+					break;
+				}
+				}
+			}
+			});
+		}
+		}
+	}
+
+	setInterval(injectStagingValues, 5);
+</script>
 </body>
 </html>
